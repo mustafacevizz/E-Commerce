@@ -3,11 +3,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Please Select Your Favorite Categories"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:textStyle="bold"/>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
-
-
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center_horizontal">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectClothes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clothes"
+            android:background="@color/g_orange_yellow"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Food"
+            android:background="#A6E4EC"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectElectronic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/g_orange_yellow"
+            android:layout_marginTop="10dp"
+            android:text="Electronıc"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectFurniture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#A6E4EC"
+            android:layout_marginTop="10dp"
+            android:text="Furnıture"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectEducation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/g_orange_yellow"
+            android:layout_marginTop="10dp"
+            android:text="Educatıon"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </FrameLayout>
