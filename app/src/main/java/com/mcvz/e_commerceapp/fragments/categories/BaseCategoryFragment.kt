@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mcvz.e_commerceapp.R
 import com.mcvz.e_commerceapp.adapters.BestProductAdapter
+import com.mcvz.e_commerceapp.adapters.UserCategoryAdapter
 import com.mcvz.e_commerceapp.databinding.FragmentBaseCategoryBinding
 
 open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
     private lateinit var binding: FragmentBaseCategoryBinding
     protected val offerAdapter: BestProductAdapter by lazy { BestProductAdapter() }
     protected val bestProductsAdapter: BestProductAdapter by lazy { BestProductAdapter() }
+    protected val userCategoryAdapter: UserCategoryAdapter by lazy { UserCategoryAdapter() }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
