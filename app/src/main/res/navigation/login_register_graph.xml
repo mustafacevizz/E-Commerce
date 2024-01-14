@@ -25,6 +25,9 @@
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
             app:enterAnim="@anim/from_bottom" />
+        <action
+            android:id="@+id/action_loginFragment_to_selectCategoryFragment"
+            app:destination="@id/selectCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -57,4 +60,8 @@
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/selectCategoryFragment"
+        android:name="com.mcvz.e_commerceapp.fragments.SelectCategoryFragment"
+        android:label="SelectCategoryFragment" />
 </navigation>

@@ -58,5 +58,14 @@
             android:layout_marginTop="10dp"
             android:text="Educatıon"
             android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectDone"
+            android:layout_width="150dp"
+            android:layout_height="10dp"
+            android:background="@color/g_blue_gray200"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:text="Done"
+            android:layout_weight="1"/>
     </LinearLayout>
 </FrameLayout>

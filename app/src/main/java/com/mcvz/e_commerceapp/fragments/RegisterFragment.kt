@@ -48,12 +48,11 @@ class RegisterFragment:Fragment(R.layout.fragment_register) {
                     etRegisterName.text.toString().trim(),
                     etRegisterLastName.text.toString().trim(),
                     etRegisterEmail.text.toString().trim(),
+                    categories = emptyList()
                 )
                 val password=etRegisterPassword.text.toString()
                 viewModel.createAccountWithEmailAndPassword(user,password)
             }
-
-
         }
         lifecycleScope.launchWhenStarted {
             viewModel.register.collect{

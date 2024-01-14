@@ -64,6 +64,7 @@ dependencies {
     //loading button
     implementation ("br.com.simplepass:loading-button-android:2.2.0")
 
+
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 

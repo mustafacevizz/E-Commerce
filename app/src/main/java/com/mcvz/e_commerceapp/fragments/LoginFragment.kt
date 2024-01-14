@@ -44,6 +44,7 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
                 val email = etSignInEmail.text.toString().trim()    //yazılan yazının başındaki ve sonundaki boşlukları sile->trim
                 val password = etSignInPassword.text.toString()
                 viewModel.login(email, password)
+                findNavController().navigate(R.id.action_loginFragment_to_selectCategoryFragment)
             }
 
         }
