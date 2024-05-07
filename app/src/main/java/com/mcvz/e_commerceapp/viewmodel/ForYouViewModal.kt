@@ -35,7 +35,7 @@ class ForYouViewModal constructor(
     }
     fun fetchOfferProducts(){
         viewModelScope.launch {
-            pOfferProducts.emit(Resource.Loading())
+            pUser.emit(Resource.Loading())
         }
         firestore.collection("user").document(userId!!)
             .get().addOnSuccessListener {
@@ -52,7 +52,7 @@ class ForYouViewModal constructor(
     }
     fun fetchBestProducts(){
         viewModelScope.launch {
-            pBestProducts.emit(Resource.Loading())
+            pUser.emit(Resource.Loading())
         }
         firestore.collection("user").document(userId!!)
             .get().addOnSuccessListener {
@@ -62,7 +62,7 @@ class ForYouViewModal constructor(
                 }
             }.addOnFailureListener {
                 viewModelScope.launch {
-                    pBestProducts.emit(Resource.Error(it.message.toString()))
+                    pUser.emit(Resource.Error(it.message.toString()))
                 }
 
             }

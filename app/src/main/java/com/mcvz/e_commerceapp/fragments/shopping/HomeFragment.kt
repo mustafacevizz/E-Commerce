@@ -13,7 +13,6 @@ import com.mcvz.e_commerceapp.fragments.categories.ClothesFragment
 import com.mcvz.e_commerceapp.fragments.categories.EducationFragment
 import com.mcvz.e_commerceapp.fragments.categories.ElectronicsFragment
 import com.mcvz.e_commerceapp.fragments.categories.FoodFragment
-import com.mcvz.e_commerceapp.fragments.categories.ForYouFragment
 import com.mcvz.e_commerceapp.fragments.categories.FurnitureFragment
 import com.mcvz.e_commerceapp.fragments.categories.MainCategoryFragment
 
@@ -31,7 +30,6 @@ class HomeFragment:Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val categoriesFragments= arrayListOf<Fragment>(
-            ForYouFragment(),
             MainCategoryFragment(),
             ClothesFragment(),
             FurnitureFragment(),
@@ -45,13 +43,12 @@ class HomeFragment:Fragment(R.layout.fragment_home) {
         binding.viewpagerHome.adapter=viewPager2Adapter
         TabLayoutMediator(binding.tabLayout,binding.viewpagerHome){ tab,position->
             when(position){
-                0->tab.text="For You"
-                1->tab.text="Main"
-                2->tab.text="Clothes"
-                3->tab.text="Furniture"
-                4->tab.text="Food"
-                5->tab.text="Education"
-                6->tab.text="Electronics"
+                0->tab.text="Main"
+                1->tab.text="Clothes"
+                2->tab.text="Furniture"
+                3->tab.text="Food"
+                4->tab.text="Education"
+                5->tab.text="Electronics"
             }
         }.attach()
     }

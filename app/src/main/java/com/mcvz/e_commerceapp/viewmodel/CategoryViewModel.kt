@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mcvz.e_commerceapp.data.Category
@@ -24,53 +25,31 @@ class CategoryViewModel constructor(
     private val pBestProducts=MutableStateFlow<Resource<List<Product>>>(Resource.Unspecified())
     val bestProducts=pBestProducts.asStateFlow()
 
-    private val pUser=MutableStateFlow<Resource<User>>(Resource.Unspecified())
-    val user=pUser.asStateFlow()
+    private val auth = FirebaseAuth.getInstance()
+    val userId = auth.currentUser?.uid
 
     init {
-        fetchUser()
         fetchOfferProducts()
         fetchBestProducts()
     }
 
 
 
-    fun fetchUser(){
-        viewModelScope.launch {
-            pUser.emit(Resource.Loading())
-        }
-        firestore.collection("user").document("qwqwe")
-            .get().addOnSuccessListener {
-                val user=it.toObject(User::class.java)
-                viewModelScope.launch {
-                    pUser.emit(Resource.Success(user))
-                }
-            }.addOnFailureListener {
-                viewModelScope.launch {
-                    pUser.emit(Resource.Error(it.message.toString()))
-                }
-
-            }
-    }
-
     fun fetchOfferProducts(){
         viewModelScope.launch {
             pOfferProducts.emit(Resource.Loading())
         }
-
-        firestore.collection("user").document("2313")
-            .get().addOnCompleteListener { task: Task<DocumentSnapshot?> ->
-                if (task.isSuccessful && task.result != null) {
-                    val firstName = task.result!!.getString("firstName")
-                    val email = task.result!!.getString("email")
-                    val categories = task.result!!.get("categories")
-                    /*Log.d("firstName", firstName.toString())
-                    Log.d("email", email.toString())
-                    Log.d("categories", categories.toString())*/
-                    //other stuff
-                } else {
-                    //deal with error
+        firestore.collection("Products").whereEqualTo("category",category.category).whereNotEqualTo("offerPercentage",null)
+            .get().addOnSuccessListener {
+                val products=it.toObjects(Product::class.java)
+                viewModelScope.launch {
+                    pOfferProducts.emit(Resource.Success(products))
                 }
+            }.addOnFailureListener {
+                viewModelScope.launch {
+                    pOfferProducts.emit(Resource.Error(it.message.toString()))
+                }
+
             }
     }
     fun fetchBestProducts(){

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,12 +14,13 @@ import com.mcvz.e_commerceapp.R
 import com.mcvz.e_commerceapp.adapters.BestProductAdapter
 import com.mcvz.e_commerceapp.adapters.UserCategoryAdapter
 import com.mcvz.e_commerceapp.databinding.FragmentBaseCategoryBinding
+import com.mcvz.e_commerceapp.util.showBottomNavigationView
 
 open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
     private lateinit var binding: FragmentBaseCategoryBinding
     protected val offerAdapter: BestProductAdapter by lazy { BestProductAdapter() }
     protected val bestProductsAdapter: BestProductAdapter by lazy { BestProductAdapter() }
-    protected val userCategoryAdapter: UserCategoryAdapter by lazy { UserCategoryAdapter() }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,6 +34,15 @@ open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
         super.onViewCreated(view, savedInstanceState)
         setupOfferRv()
         setupBestProductsRv()
+
+        bestProductsAdapter.onClick={
+            val b = Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment,b)
+        }
+        offerAdapter.onClick={
+            val b = Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment,b)
+        }
 
         binding.rvOfferProducts.setOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -57,6 +68,7 @@ open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
 
     }
 
+
     fun showBestProductsLoading(){
         binding.bestProductsProgressBar.visibility=View.VISIBLE
 
@@ -73,6 +85,7 @@ open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
     open fun onBestProductsPagingRequests(){
 
     }
+
     private fun setupOfferRv() {
         binding.rvOfferProducts.apply {
             layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
@@ -85,5 +98,10 @@ open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
             layoutManager= GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
             adapter=bestProductsAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 }

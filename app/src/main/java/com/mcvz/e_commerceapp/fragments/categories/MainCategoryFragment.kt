@@ -10,6 +10,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mcvz.e_commerceapp.R
@@ -18,6 +19,7 @@ import com.mcvz.e_commerceapp.adapters.BestProductAdapter
 import com.mcvz.e_commerceapp.adapters.SpecialProductsAdapter
 import com.mcvz.e_commerceapp.databinding.FragmentMainCategoryBinding
 import com.mcvz.e_commerceapp.util.Resource
+import com.mcvz.e_commerceapp.util.showBottomNavigationView
 import com.mcvz.e_commerceapp.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -47,6 +49,22 @@ class MainCategoryFragment:Fragment(R.layout.fragment_main_category) {
         setupSpecialProductsRv()
         setupBestDealsRv()
         setupBestProductsRv()
+
+        specialProductsAdapter.onClick={
+            val b = Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment,b)
+        }
+
+        bestDealsAdapter.onClick={
+            val b = Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment,b)
+        }
+
+        bestProductsAdapter.onClick={
+            val b = Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment,b)
+        }
+
         lifecycleScope.launchWhenStarted {
             viewModel.bestDealsProducts.collectLatest {
                 when(it){
@@ -144,6 +162,11 @@ class MainCategoryFragment:Fragment(R.layout.fragment_main_category) {
             layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             adapter=specialProductsAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 
 

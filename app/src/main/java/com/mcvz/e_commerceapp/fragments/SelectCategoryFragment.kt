@@ -91,6 +91,7 @@ class SelectCategoryFragment:Fragment(R.layout.fragment_select_category) {
                     }
                 }*/
                 updateCategories(userId, selectedCategories.toList())
+
                 /*val userCategories = mutableListOf<Int>()
                 for (button in categoryButtons) {
                     val categoryId = when (button) {
@@ -138,6 +139,7 @@ class SelectCategoryFragment:Fragment(R.layout.fragment_select_category) {
 
         }
     }
+
 
     private fun toggleCategorySelection(categoryId: Int) {
         if (selectedCategories.contains(categoryId)){
@@ -228,4 +230,6 @@ class SelectCategoryFragment:Fragment(R.layout.fragment_select_category) {
 
                             }
     }
+
 }
+

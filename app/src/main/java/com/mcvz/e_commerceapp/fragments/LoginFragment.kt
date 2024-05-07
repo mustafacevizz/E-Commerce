@@ -45,6 +45,7 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
                 val password = etSignInPassword.text.toString()
                 viewModel.login(email, password)
                 findNavController().navigate(R.id.action_loginFragment_to_selectCategoryFragment)
+
             }
 
         }
@@ -52,6 +53,31 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
         binding.twForgotPassword.setOnClickListener {
             setupBottomSheetDialog { email ->
                 viewModel.resetPassword(email)
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.login.collect {
+                when (it) {
+                    is Resource.Loading -> {
+                        binding.btnLogIn.startAnimation()
+                    }
+
+                    is Resource.Success -> {
+                        binding.btnLogIn.revertAnimation()
+                        Intent(requireActivity(), ShoppingActivity::class.java).also { intent ->
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)   //önceki aktiviteler stackten temizlenir. Yeni aktivite stackte yerini alır
+                            startActivity(intent)
+
+                        }
+                    }
+
+                    is Resource.Error -> {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        binding.btnLogIn.revertAnimation()
+                    }
+                    else -> Unit
+
+                }
             }
         }
         lifecycleScope.launchWhenStarted {
@@ -79,31 +105,8 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
                 }
             }
 
-            lifecycleScope.launchWhenStarted {
-                viewModel.login.collect {
-                    when (it) {
-                        is Resource.Loading -> {
-                            binding.btnLogIn.startAnimation()
-                        }
 
-                        is Resource.Success -> {
-                            binding.btnLogIn.revertAnimation()
-                            Intent(requireActivity(), ShoppingActivity::class.java).also { intent ->
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)   //önceki aktiviteler stackten temizlenir. Yeni aktivite stackte yerini alır
-                                startActivity(intent)
 
-                            }
-                        }
-
-                        is Resource.Error -> {
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                            binding.btnLogIn.revertAnimation()
-                        }
-
-                        else -> Unit
-                    }
-                }
-            }
 
 
         }

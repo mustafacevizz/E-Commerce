@@ -5,6 +5,7 @@ data class User (
     val lastName:String,
     val email:String,
     val imagePath:String="",
+
     val categories:List<Int>
 
 

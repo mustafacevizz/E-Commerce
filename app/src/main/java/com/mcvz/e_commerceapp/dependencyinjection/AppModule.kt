@@ -3,9 +3,11 @@ package com.mcvz.e_commerceapp.dependencyinjection
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.mcvz.e_commerceapp.firebase.FirebaseCommon
 import com.mcvz.e_commerceapp.util.Constans.INTRODUCTION_SP
 import dagger.Module
 import dagger.Provides
@@ -29,4 +31,10 @@ object AppModule {
         application: Application
     )=application.getSharedPreferences(INTRODUCTION_SP,MODE_PRIVATE)
 
+    @Provides
+    @Singleton
+    fun provideFirebaseCommon(
+        firebaseAuth: FirebaseAuth,
+        firestore: FirebaseFirestore
+    )=FirebaseCommon(firestore,firebaseAuth)
 }
