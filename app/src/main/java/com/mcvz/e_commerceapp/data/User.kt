@@ -6,7 +6,7 @@ data class User (
     val email:String,
     val imagePath:String="",
 
-    val categories:List<Int>
+    val categories:List<Int> = emptyList()
 
 
     ){
