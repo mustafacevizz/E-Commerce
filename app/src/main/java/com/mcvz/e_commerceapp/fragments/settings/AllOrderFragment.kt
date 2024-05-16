@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mcvz.e_commerceapp.adapters.AllOrderAdapter
@@ -56,6 +57,10 @@ class AllOrderFragment:Fragment() {
                     else -> Unit
                 }
             }
+        }
+        allOrderAdapter.onClick={
+            val action=AllOrderFragmentDirections.actionAllOrderFragmentToOrderDetailFragment(it)
+            findNavController().navigate(action)
         }
     }
 

@@ -5,14 +5,13 @@ data class User (
     val lastName:String,
     val email:String,
     val imagePath:String="",
-
-    val categories:List<Int> = emptyList()
+    val categories:List<CategoryItem> = emptyList()
 
 
     ){
     constructor():this("","","","", emptyList())
 }
 data class CategoryItem(
-    val id: Int,
-    val name: String,
+    val id: Int?=0,
+    val name: String?=null
 )
