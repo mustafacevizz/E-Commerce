@@ -85,6 +85,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.50")
     kapt("com.google.dagger:hilt-android-compiler:2.50")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
+    implementation ("com.squareup.picasso:picasso:2.8")
 }
 kapt {
     correctErrorTypes = true

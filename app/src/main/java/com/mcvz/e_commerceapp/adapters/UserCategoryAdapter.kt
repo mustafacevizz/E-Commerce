@@ -12,6 +12,8 @@ import com.mcvz.e_commerceapp.data.Product
 import com.mcvz.e_commerceapp.databinding.ProductRvItemBinding
 
 class UserCategoryAdapter: RecyclerView.Adapter<UserCategoryAdapter.UserCategoryViewHolder>() {
+
+
     inner class UserCategoryViewHolder(private val binding: ProductRvItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {

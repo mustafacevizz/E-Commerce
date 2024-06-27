@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mcvz.e_commerceapp.data.Product
 import com.mcvz.e_commerceapp.databinding.SpecialRvItemBinding
+import java.util.ArrayList
 
-class SpecialProductsAdapter:RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
+class SpecialProductsAdapter():RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
+    //added working on searchview
+
     inner class SpecialProductsViewHolder(private val binding:SpecialRvItemBinding):RecyclerView
     .ViewHolder(binding.root){
         fun bind(product: Product){
@@ -48,6 +51,8 @@ class SpecialProductsAdapter:RecyclerView.Adapter<SpecialProductsAdapter.Special
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+
 
     var onClick:((Product)-> Unit)?=null
 

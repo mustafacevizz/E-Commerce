@@ -14,11 +14,11 @@
         android:theme="@style/Theme.ECommerceApp"
         tools:targetApi="31">
         <activity
-            android:name=".ShoppingActivity"
+            android:name=".LoginActivity"
             android:exported="false">
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ShoppingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

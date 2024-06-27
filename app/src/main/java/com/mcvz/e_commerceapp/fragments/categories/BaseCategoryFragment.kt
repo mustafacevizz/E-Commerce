@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mcvz.e_commerceapp.R
 import com.mcvz.e_commerceapp.adapters.BestProductAdapter
-import com.mcvz.e_commerceapp.adapters.UserCategoryAdapter
 import com.mcvz.e_commerceapp.databinding.FragmentBaseCategoryBinding
 import com.mcvz.e_commerceapp.util.showBottomNavigationView
 

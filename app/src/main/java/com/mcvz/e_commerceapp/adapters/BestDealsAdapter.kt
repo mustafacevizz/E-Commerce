@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.mcvz.e_commerceapp.data.Product
 import com.mcvz.e_commerceapp.databinding.BestDealsRvItemBinding
-import com.mcvz.e_commerceapp.databinding.SpecialRvItemBinding
 
-class BestDealsAdapter: RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolder>() {
+class BestDealsAdapter() : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolder>() {
+
+
     inner class BestDealsViewHolder(private val binding: BestDealsRvItemBinding):ViewHolder(binding.root){
         fun bind(product: Product){
             binding.apply {
@@ -26,9 +27,6 @@ class BestDealsAdapter: RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolde
             }
         }
     }
-
-
-
     private val diffCallback=object : DiffUtil.ItemCallback<Product>(){
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id==newItem.id
@@ -46,7 +44,6 @@ class BestDealsAdapter: RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolde
             )
         )
     }
-
     override fun onBindViewHolder(holder: BestDealsViewHolder, position: Int) {
         val product=differ.currentList[position]
         holder.bind(product)
@@ -55,7 +52,6 @@ class BestDealsAdapter: RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolde
             onClick?.invoke(product)
         }
     }
-
     override fun getItemCount(): Int {
         return differ.currentList.size
     }

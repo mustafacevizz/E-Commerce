@@ -1,6 +1,7 @@
 package com.mcvz.e_commerceapp.fragments.categories
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -68,5 +69,27 @@ class ClothesFragment:BaseCategoryFragment() {
 
     override fun onOfferPagingRequests() {
 
+    }
+
+    fun filterProducts(query: String) {
+        Log.e("abx",query)
+        //specialProductsAdapter= SpecialProductsAdapter(emptyList())
+        val filteredSpecialProducts = offerAdapter.differ.currentList.filter {
+            it.name.contains(query, ignoreCase = true)
+        }
+        Log.e("filtersSpclprdct",filteredSpecialProducts.toString())
+
+        offerAdapter.differ.submitList(filteredSpecialProducts)
+        //bestDealsAdapter= BestDealsAdapter(emptyList())
+        val filteredBestDealsProducts = bestProductsAdapter.differ.currentList.filter {
+            it.name.contains(query, ignoreCase = true)
+        }
+        bestProductsAdapter.differ.submitList(filteredBestDealsProducts)
+        //bestProductsAdapter= BestProductAdapter(emptyList())
+
+    }
+    fun setupFun(){
+        offerAdapter.differ.currentList
+        bestProductsAdapter.differ.currentList
     }
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
@@ -17,13 +18,13 @@ import com.mcvz.e_commerceapp.R
 import com.mcvz.e_commerceapp.adapters.BestDealsAdapter
 import com.mcvz.e_commerceapp.adapters.BestProductAdapter
 import com.mcvz.e_commerceapp.adapters.SpecialProductsAdapter
+import com.mcvz.e_commerceapp.data.Product
 import com.mcvz.e_commerceapp.databinding.FragmentMainCategoryBinding
 import com.mcvz.e_commerceapp.util.Resource
 import com.mcvz.e_commerceapp.util.showBottomNavigationView
 import com.mcvz.e_commerceapp.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 
 private val TAG="MainCategoryFragment"
@@ -34,6 +35,11 @@ class MainCategoryFragment:Fragment(R.layout.fragment_main_category) {
     private lateinit var bestDealsAdapter:BestDealsAdapter
     private lateinit var bestProductsAdapter: BestProductAdapter
     private val viewModel by viewModels<MainCategoryViewModel>()
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +53,9 @@ class MainCategoryFragment:Fragment(R.layout.fragment_main_category) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupSpecialProductsRv()
-        setupBestDealsRv()
+        setupBestDealsRv()   //
         setupBestProductsRv()
+        specialProductsAdapter= SpecialProductsAdapter()
 
         specialProductsAdapter.onClick={
             val b = Bundle().apply { putParcelable("product",it) }
@@ -130,6 +137,7 @@ class MainCategoryFragment:Fragment(R.layout.fragment_main_category) {
 
         })
 
+
     }
 
     private fun setupBestProductsRv() {
@@ -141,7 +149,7 @@ class MainCategoryFragment:Fragment(R.layout.fragment_main_category) {
     }
 
     private fun setupBestDealsRv() {
-        bestDealsAdapter= BestDealsAdapter()
+        bestDealsAdapter= BestDealsAdapter()    //
         binding.rvBestDealsProducts.apply {
             layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             adapter=bestDealsAdapter
@@ -156,7 +164,7 @@ class MainCategoryFragment:Fragment(R.layout.fragment_main_category) {
         binding.mainCategoryProgressbar.visibility=View.VISIBLE
     }
 
-    private fun setupSpecialProductsRv() {
+    fun setupSpecialProductsRv() {
         specialProductsAdapter= SpecialProductsAdapter()
         binding.rvSpecialProducts.apply {
             layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
@@ -164,10 +172,38 @@ class MainCategoryFragment:Fragment(R.layout.fragment_main_category) {
         }
     }
 
+
+    /*fun filterProducts(query: String) {
+        Log.e("abx",query)
+        //specialProductsAdapter= SpecialProductsAdapter(emptyList())
+        val filteredSpecialProducts = specialProductsAdapter.differ.currentList.filter {
+            it.name.contains(query, ignoreCase = true)
+        }
+        Log.e("filtersSpclprdct",filteredSpecialProducts.toString())
+
+        specialProductsAdapter.differ.submitList(filteredSpecialProducts)
+        //bestDealsAdapter= BestDealsAdapter(emptyList())
+        val filteredBestDealsProducts = bestDealsAdapter.differ.currentList.filter {
+            it.name.contains(query, ignoreCase = true)
+        }
+        bestDealsAdapter.differ.submitList(filteredBestDealsProducts)
+        //bestProductsAdapter= BestProductAdapter(emptyList())
+        val filteredBestProducts = bestProductsAdapter.differ.currentList.filter {
+            it.name.contains(query, ignoreCase = true)
+        }
+        bestProductsAdapter.differ.submitList(filteredBestProducts)
+    }*/
+
+    //fun setupFun(){
+       // setupBestDealsRv()
+        //setupBestProductsRv()
+        //setupSpecialProductsRv()
+   // }
+
+
+
     override fun onResume() {
         super.onResume()
         showBottomNavigationView()
     }
-
-
 }

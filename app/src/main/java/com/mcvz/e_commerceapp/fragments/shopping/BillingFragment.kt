@@ -61,7 +61,7 @@ class BillingFragment:Fragment() {
         setupBillingProductRv()
         setupAddressRv()
 
-        if (args.payment){
+        if (!args.payment){
             binding.apply {
                 buttonPlaceOrder.visibility = View.INVISIBLE
                 totalBoxContainer.visibility = View.INVISIBLE

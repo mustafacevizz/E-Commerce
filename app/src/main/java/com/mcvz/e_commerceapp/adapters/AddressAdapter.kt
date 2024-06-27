@@ -19,7 +19,7 @@ class AddressAdapter : RecyclerView.Adapter<AddressAdapter.AddressViewHolder>() 
             binding.apply {
                 buttonAddress.text = address.addressTitle
                 if (isSelected){
-                    buttonAddress.background = ColorDrawable(itemView.context.resources.getColor(R.color.g_blue))
+                    buttonAddress.background = ColorDrawable(itemView.context.resources.getColor(R.color.g_blue100))
                 }else{
                     buttonAddress.background = ColorDrawable(itemView.context.resources.getColor(R.color.g_white))
                 }
